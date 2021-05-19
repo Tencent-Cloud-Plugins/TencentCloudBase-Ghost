@@ -1,0 +1,49 @@
+{
+  "version": "2.0",
+  "envId": "{{env.ENV_ID}}",
+  "framework": {
+    "name": "Ghost",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-container",
+        "inputs": {
+          "serviceName": "Ghost",
+          "servicePath": "/",
+          "uploadType": "image",
+          "imageInfo": {
+            "imageUrl": "ghost:4.4.0"
+          },
+          "containerPort": 2368,
+          "customLogs": "stdout,/dev/stdout,/dev/stderr",
+          "envVariables": {
+            "database__client": "mysql",
+            "database__connection__host": "{{env.DB_IP}}",
+            "database__connection__port": "{{env.DB_PORT}}",
+            "database__connection__user": "{{env.MYSQL_USERNAME}}",
+            "database__connection__password": "{{env.MYSQL_PASSWORD}}",
+            "database__connection__database": "tcb_ghost",
+            "url": "https://${TcbHttpServiceDefaultDomain}"
+          },
+          "volumeMounts": {
+            "/var/lib/ghost/content/images": "ghost-cfs"
+          }
+        }
+      }
+    },
+    "requirement": {
+      "addons": [{
+        "type": "CFS",
+        "name": "ghost-cfs"
+      }, {
+        "type": "CynosDB",
+        "name": "ghost",
+        "envMap": {
+          "IP": "DB_IP",
+          "PORT": "DB_PORT",
+          "USERNAME": "MYSQL_USERNAME",
+          "PASSWORD": "MYSQL_PASSWORD"
+        }
+      }]
+    }
+  }
+}
