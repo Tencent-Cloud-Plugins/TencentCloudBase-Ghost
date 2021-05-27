@@ -13,6 +13,7 @@
           "imageInfo": {
             "imageUrl": "ghost:4.4.0"
           },
+          "initialDelaySeconds": 10,
           "containerPort": 2368,
           "customLogs": "stdout,/dev/stdout,/dev/stderr",
           "envVariables": {
