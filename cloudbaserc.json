@@ -23,7 +23,8 @@
             "database__connection__user": "{{env.MYSQL_USERNAME}}",
             "database__connection__password": "{{env.MYSQL_PASSWORD}}",
             "database__connection__database": "tcb_ghost",
-            "url": "https://${TcbHttpServiceDefaultDomain}"
+            "url": "https://${TcbHttpServiceDefaultDomain}",
+            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.ghost.Properties.InstanceId}"
           },
           "volumeMounts": {
             "/var/lib/ghost/content/images": "ghost-cfs"
